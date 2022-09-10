@@ -2,6 +2,9 @@ from discord import Intents, utils, Status, Embed, Color, Activity, ActivityType
 from discord.ext import commands
 import os
 import asyncio
+import requests
+from threading import Timer
+from parsing_hero_info import get_html
 
 discord_info = {'log_channel_id': 955177936519041054,
                 'token': os.getenv('JabronyBot_TOKEN', None),
@@ -76,8 +79,10 @@ async def help(ctx, *, msg=None):
 
 async def main():
     async with bot:
+
         await load_extensions()
         await bot.start(discord_info['token'])
+        await Timer(540, get_html('https://jabronybot.herokuapp.com')).start()
 
 
 if __name__ == '__main__':
