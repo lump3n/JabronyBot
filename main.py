@@ -2,7 +2,6 @@ from discord import Intents, utils, Status, Embed, Color, Activity, ActivityType
 from discord.ext import commands
 import os
 import asyncio
-import requests
 from threading import Timer
 from parsing_hero_info import get_html
 
@@ -41,7 +40,6 @@ async def on_ready():
     utils.setup_logging()
 
     await bot.change_presence(status=Status.online, activity=(Activity(type=ActivityType.listening, name="!help 🐗")))
-    print("готов")
     log_channel = bot.get_channel(discord_info["log_channel_id"])
     await log_channel.send("Жаброня на месте")
 
