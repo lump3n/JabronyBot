@@ -1,7 +1,7 @@
 import youtube_dl
 import discord
 from discord.ext import commands
-import pafy
+import apafy
 import asyncio
 
 
@@ -24,7 +24,7 @@ class Music(commands.Cog):
         return [entry["webpage_url"] for entry in info["entries"]] if get_url else info
 
     async def play_song(self, ctx, song):
-        url = pafy.new(song).getbestaudio().url
+        url = apafy.new(song).getbestaudio().url
         ctx.voice_client.play(discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(url)),
                               after=lambda error: self.bot.loop.create_task(self.check_queue(ctx)))
         ctx.voice_client.source.volume = 0.5
